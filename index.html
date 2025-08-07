@@ -214,23 +214,23 @@
         <div id="tableContainer" class="table-container" style="display: none;"></div>
       </div>
     </div>
-    <div class="context-menu" id="contextMenu">
-      <div class="menu-item" data-action="insertAbove">Inserir linhas acima da célula</div>
-      <div class="menu-item" data-action="insertBelow">Inserir linhas abaixo da célula</div>
-      <div class="menu-item" data-action="insertBelow">Inserir colunas a direita da célula</div>
-      <div class="menu-item" data-action="insertBelow">Inserir colunas a esquerda da célula</div>
-      <div class="menu-item delete" data-action="deleteLine">Excluir Linha</div>
-      <div class="menu-item delete" data-action="deleteLine">Excluir Coluna</div>
-      <hr>
-      <div class="menu-item" data-action="clearContent">Inserir Conteúdo</div>
-      <div class="menu-item" data-action="clearContent">Limpar Conteúdo</div>
-      <hr>
-      <div class="menu-item" data-action="sortAsc">Classificar em Ordem Crescente</div>
-      <div class="menu-item" data-action="sortDesc">Classificar em Ordem Decrescente</div>
-      <hr>
-      <div class="menu-item" data-action="downloadPDF">Baixar planilha como PDF</div>
-      <div class="menu-item" data-action="downloadPDF">Baixar planilha como JSON</div>
-  </div>
+<div class="context-menu" id="contextMenu">
+  <div class="menu-item" data-action="insertRowAbove">Inserir linhas acima da célula</div>
+  <div class="menu-item" data-action="insertRowBelow">Inserir linhas abaixo da célula</div>
+  <div class="menu-item" data-action="insertColRight">Inserir colunas à direita da célula</div>
+  <div class="menu-item" data-action="insertColLeft">Inserir colunas à esquerda da célula</div>
+  <div class="menu-item delete" data-action="deleteLine">Excluir Linha</div>
+  <div class="menu-item delete" data-action="deleteCol">Excluir Coluna</div>
+  <hr>
+  <div class="menu-item" data-action="insertContent">Inserir Conteúdo</div>
+  <div class="menu-item" data-action="clearContent">Limpar Conteúdo</div>
+  <hr>
+  <div class="menu-item" data-action="sortAsc">Classificar em Ordem Crescente</div>
+  <div class="menu-item" data-action="sortDesc">Classificar em Ordem Decrescente</div>
+  <hr>
+  <div class="menu-item" data-action="downloadPDF">Baixar planilha como PDF</div>
+  <div class="menu-item" data-action="downloadJSON">Baixar planilha como JSON</div>
+</div>
 <script>
   const uploadArea = document.getElementById('uploadArea');
   const fileInput = document.getElementById('fileInput');
@@ -370,30 +370,31 @@
     if (!currentLine || !action) return;
 
     switch (action) {
-      case 'insertAbove':
-        createNewLine(currentLine, true);
-        break;
-      case 'insertBelow':
-        createNewLine(currentLine);
-        break;
-      case 'deleteLine':
-        currentLine.remove();
-        renumberLines();
-        break;
-      case 'clearContent':
-        currentLine.querySelector('.lineContent').textContent = '';
-        currentLine.querySelector('.lineContent').focus();
-        break;
-      case 'sortAsc':
-        // Lógica de ordenação (necessita implementação)
-        break;
-      case 'sortDesc':
-        // Lógica de ordenação (necessita implementação)
-        break;
-      case 'downloadPDF':
-        // Lógica de download de PDF (necessita implementação com biblioteca externa)
-        break;
-    }
+  case 'insertRowAbove':
+    break;
+  case 'insertRowBelow':
+    break;
+  case 'insertColRight':
+    break;
+  case 'insertColLeft':
+    break;
+  case 'deleteLine':
+    break;
+  case 'deleteCol':
+    break;
+  case 'insertContent':
+    break;
+  case 'clearContent':
+    break;
+  case 'sortAsc':
+    break;
+  case 'sortDesc':
+    break;
+  case 'downloadPDF':
+    break;
+  case 'downloadJSON':
+    break;
+}
     contextMenu.style.display = 'none';
     resetFilter(); // Reseta o filtro ao selecionar uma opção
   });
@@ -424,7 +425,7 @@
   }, true);
   
   // ----------------------------------------------------
-  // NOVO CÓDIGO PARA A FUNCIONALIDADE DE FILTRO
+  // CÓDIGO PARA A FUNCIONALIDADE DE FILTRO
   // ----------------------------------------------------
 
   // Função para aplicar o filtro
@@ -466,4 +467,5 @@
 
 </script>
   </body>
+
 </html>
