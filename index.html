@@ -102,6 +102,14 @@
             text-align: left;
             border-radius: 5px;
             cursor: text;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+        .line .lineContent input {
+          max-width: 50px; 
+          margin: 0px 5px;
+          text-align: center;
         }
         .line:hover {
             background: #c6c6c62e;
@@ -381,7 +389,8 @@
 
     switch (action) {
   case 'insertRowAbove':
-    lineFocus.innerHTML = `Inserir <input placeholder="1"> linhas acima da célula <input placeholder="A1"`
+    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1"> linhas acima da célula <input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
+    createNewLine(currentLine);
     break;
   case 'insertRowBelow':
     break;
@@ -480,4 +489,3 @@
   </body>
 
 </html>
-
