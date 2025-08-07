@@ -230,6 +230,11 @@
   <hr>
   <div class="menu-item" data-action="downloadPDF">Baixar planilha como PDF</div>
   <div class="menu-item" data-action="downloadJSON">Baixar planilha como JSON</div>
+  <div class="menu-item" data-action="downloadJSON">Baixar planilha como HTML</div>
+  <hr>
+  <div class="menu-item" data-action="CPDF">Converter HTML para EXCEL</div>
+  <div class="menu-item" data-action="rectJSON">Converter JSON para EXCEL</div>
+  <div class="menu-item" data-action="rectTXT">Converter TXT para EXCEL</div>
   <hr>
   <div class="menu-item" data-action="SAPconnection"><i>Conexão SAP</i></div>
   <div class="menu-item" data-action="SAPconnection"><i>Abrir Transação SAP</i></div>
@@ -372,9 +377,11 @@
   contextMenu.addEventListener('click', (e) => {
     const action = e.target.dataset.action;
     if (!currentLine || !action) return;
+    const lineFocus = e.target.closest('.line');
 
     switch (action) {
   case 'insertRowAbove':
+    lineFocus.innerHTML = `Inserir <input placeholder="1"> linhas acima da célula <input placeholder="A1"`
     break;
   case 'insertRowBelow':
     break;
