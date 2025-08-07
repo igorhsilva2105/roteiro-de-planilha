@@ -393,26 +393,44 @@
     createNewLine(currentLine);
     break;
   case 'insertRowBelow':
+    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1"> linhas abaixo da célula <input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
+    createNewLine(currentLine);
     break;
   case 'insertColRight':
+    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1"> linhas a direita da célula <input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
+    createNewLine(currentLine);
     break;
   case 'insertColLeft':
+    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1"> linhas a esquerda da célula <input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
+    createNewLine(currentLine);
     break;
   case 'deleteLine':
+    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Excluir linhas <input placeholder="1"></p><p class="deleteLine">🗑️</p>`
+    createNewLine(currentLine);
     break;
   case 'deleteCol':
+    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Excluir coluna <input placeholder="A"></p><p class="deleteLine">🗑️</p>`
+    createNewLine(currentLine);
     break;
   case 'insertContent':
+    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir conteúdo <input placeholder="texto">na célula<input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
+    createNewLine(currentLine);
     break;
   case 'clearContent':
+    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Limpar conteúdo da célula<input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
+    createNewLine(currentLine);
     break;
   case 'sortAsc':
     break;
   case 'sortDesc':
     break;
   case 'downloadPDF':
+    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Baixar como PDF 🗃️</p><p class="deleteLine">🗑️</p>`
+    createNewLine(currentLine);
     break;
   case 'downloadJSON':
+    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Baixar como JSON 🗃️</p><p class="deleteLine">🗑️</p>`
+    createNewLine(currentLine);
     break;
 }
     contextMenu.style.display = 'none';
@@ -486,6 +504,5 @@
   });
 
 </script>
-  </body>
-
+</body>
 </html>
