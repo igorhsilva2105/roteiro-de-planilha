@@ -377,7 +377,7 @@
   contextMenu.addEventListener('click', (e) => {
     const action = e.target.dataset.action;
     if (!currentLine || !action) return;
-    const lineFocus = e.target.closest('.line');
+    const lineFocus = currentLine;
 
     switch (action) {
   case 'insertRowAbove':
@@ -480,3 +480,4 @@
   </body>
 
 </html>
+
