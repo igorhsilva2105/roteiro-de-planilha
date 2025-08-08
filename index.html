@@ -128,6 +128,10 @@
            user-select: none;
            transition: opacity 0.2s ease;
         }
+        /* Nova regra para ocultar o botão de exclusão da primeira linha */
+        .editorArea .line:first-child .deleteLine {
+           display: none !important;
+        }
         .line:hover .deleteLine {
           display: block;
         }
@@ -159,7 +163,7 @@
           min-width: 200px;
           max-height: 240px;
           overflow-y: scroll;
-          display: none; /* Inicia oculto */
+          display: none;
         }
 /* Supondo que sua div tenha a classe 'minha-div' */
 .context-menu::-webkit-scrollbar {
@@ -212,6 +216,7 @@
       <div class="editorArea">
         <div class="line">
           <p class="lineNumber">1</p><p class="lineContent" contenteditable="true">Editar linha</p>
+          <p class="deleteLine">🗑️</p>
         </div>
       </div>
       <div class="preview">
@@ -223,31 +228,60 @@
       </div>
     </div>
 <div class="context-menu" id="contextMenu">
-  <div class="menu-item" data-action="insertRowAbove">Inserir linhas acima da célula</div>
-  <div class="menu-item" data-action="insertRowBelow">Inserir linhas abaixo da célula</div>
-  <div class="menu-item" data-action="insertColRight">Inserir colunas à direita da célula</div>
-  <div class="menu-item" data-action="insertColLeft">Inserir colunas à esquerda da célula</div>
-  <div class="menu-item delete" data-action="deleteLine">Excluir Linha</div>
-  <div class="menu-item delete" data-action="deleteCol">Excluir Coluna</div>
+  <div class="menu-item" data-action="insert-row-above">Inserir linhas acima da célula</div>
+  <div class="menu-item" data-action="insert-row-below">Inserir linhas abaixo da célula</div>
+  <div class="menu-item" data-action="insert-col-right">Inserir colunas à direita da célula</div>
+  <div class="menu-item" data-action="insert-col-left">Inserir colunas à esquerda da célula</div>
+  <div class="menu-item delete" data-action="delete-row">Excluir Linha</div>
+  <div class="menu-item delete" data-action="delete-col">Excluir Coluna</div>
   <hr>
-  <div class="menu-item" data-action="insertContent">Inserir Conteúdo</div>
-  <div class="menu-item" data-action="convertUMB">Converter unidade de medida</div>
-  <div class="menu-item" data-action="clearContent">Limpar Conteúdo</div>
+
+  <div class="menu-item" data-action="insert-content">Inserir Conteúdo</div>
+  <div class="menu-item" data-action="clear-content">Limpar Conteúdo</div>
+  <div class="menu-item" data-action="convert-unit">Converter unidade de medida</div>
+  <div class="menu-item" data-action="split-text">Dividir texto em colunas</div>
+  <div class="menu-item" data-action="merge-cells">Unir células</div>
+  <div class="menu-item" data-action="reformat-data">Reformatar dados</div>
   <hr>
-  <div class="menu-item" data-action="sortAsc">Classificar em Ordem Crescente</div>
-  <div class="menu-item" data-action="sortDesc">Classificar em Ordem Decrescente</div>
+
+  <div class="menu-item" data-action="find-and-replace">Localizar e substituir</div>
+  <div class="menu-item" data-action="remove-duplicates">Remover duplicados</div>
+  <div class="menu-item" data-action="data-validation">Validação de dados</div>
   <hr>
-  <div class="menu-item" data-action="downloadPDF">Baixar planilha como PDF</div>
-  <div class="menu-item" data-action="downloadJSON">Baixar planilha como JSON</div>
-  <div class="menu-item" data-action="downloadJSON">Baixar planilha como HTML</div>
+
+  <div class="menu-item" data-action="sort-col-asc">Classificar coluna em Ordem Crescente</div>
+  <div class="menu-item" data-action="sort-col-desc">Classificar coluna em Ordem Decrescente</div>
+  <div class="menu-item" data-action="sort-row-asc">Classificar linha em Ordem Crescente</div>
+  <div class="menu-item" data-action="sort-row-desc">Classificar linha em Ordem Decrescente</div>
   <hr>
-  <div class="menu-item" data-action="CPDF">Converter HTML para EXCEL</div>
-  <div class="menu-item" data-action="rectJSON">Converter JSON para EXCEL</div>
-  <div class="menu-item" data-action="rectTXT">Converter TXT para EXCEL</div>
+
+  <div class="menu-item" data-action="download-xlsx">Baixar planilha como XLSX</div>
+  <div class="menu-item" data-action="download-pdf">Baixar planilha como PDF</div>
+  <div class="menu-item" data-action="download-json">Baixar planilha como JSON</div>
+  <div class="menu-item" data-action="download-html">Baixar planilha como HTML</div>
+  <div class="menu-item" data-action="download-csv">Baixar planilha como CSV</div>
+  <div class="menu-item" data-action="download-xml">Baixar planilha como XML</div>
   <hr>
-  <div class="menu-item" data-action="SAPconnection"><i>Conexão SAP</i></div>
-  <div class="menu-item" data-action="SAPconnection"><i>Abrir Transação SAP</i></div>
-  <div class="menu-item" data-action="SAPconnection"><i>Preencher campos SAP</i></div>
+
+  <div class="menu-item" data-action="convert-html-to-excel">Converter HTML para EXCEL</div>
+  <div class="menu-item" data-action="convert-json-to-excel">Converter JSON para EXCEL</div>
+  <div class="menu-item" data-action="convert-txt-to-excel">Converter TXT para EXCEL</div>
+  <hr>
+
+  <div class="menu-item" data-action="connect-sap"><i>Conexão SAP</i></div>
+  <div class="menu-item" data-action="open-sap-transaction"><i>Abrir Transação SAP</i></div>
+  <div class="menu-item" data-action="fill-sap-fields"><i>Preencher campos SAP</i></div>
+  <hr>
+
+  <div class="menu-item" data-action="wait-for-upload">Aguardar Upload de planilha</div>
+  <div class="menu-item" data-action="preview-data">Pré-visualizar dados</div>
+  <div class="menu-item" data-action="add-comment">Fazer um comentário</div>
+  <div class="menu-item" data-action="insert-custom-code">Inserir código personalizado</div>
+  <div class="menu-item" data-action="save-script">Salvar Roteiro</div>
+  <hr>
+
+  <div class="menu-item" data-action="generate-report">Gerar Relatório</div>
+  <div class="menu-item" data-action="send-email">Enviar por E-mail</div>
 </div>
 <script>
   const uploadArea = document.getElementById('uploadArea');
@@ -255,10 +289,13 @@
   const fileName = document.getElementById('fileName');
   const editorArea = document.querySelector('.editorArea');
   const contextMenu = document.getElementById('contextMenu');
-  const menuItems = contextMenu.querySelectorAll('.menu-item'); // Seleciona todos os itens do menu
+  const menuItems = contextMenu.querySelectorAll('.menu-item');
+  const previewButton = document.querySelector('.previewButton');
   let currentLine = null;
+  
+  // Array para armazenar as ações do script
+  const scriptActions = [];
 
-  // Função para exibir mensagens na área de status
   function logStatus(type, message) {
     const statusDiv = document.getElementById('status');
     statusDiv.classList.remove('hidden', 'status-success', 'status-error', 'status-processing');
@@ -277,10 +314,8 @@
     statusDiv.textContent = message;
   }
 
-  // Tratamento do clique para abrir o seletor de arquivos
   uploadArea.addEventListener('click', () => fileInput.click());
 
-  // Verificação de tipo de arquivo ao selecionar
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
     if (!file) {
@@ -290,14 +325,13 @@
     const allowedTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
     if (!allowedTypes.includes(file.type)) {
       logStatus('error', 'Formato inválido. Por favor, envie um arquivo .xls ou .xlsx.');
-      fileInput.value = ''; // Limpa o input
+      fileInput.value = '';
       return;
     }
     fileName.textContent = `📄 ${file.name}`;
     logStatus('success', 'Arquivo válido! Pronto para processar.');
   });
 
-  // Função para re-numerar as linhas
   function renumberLines() {
     const lines = document.querySelectorAll('.line');
     lines.forEach((line, index) => {
@@ -306,7 +340,6 @@
     });
   }
 
-  // Função para posicionar o cursor no final do conteúdo
   function placeCursorAtEnd(el) {
     const range = document.createRange();
     const sel = window.getSelection();
@@ -316,7 +349,6 @@
     sel.addRange(range);
   }
 
-  // Função unificada para criar nova linha
   function createNewLine(referenceLineElement, insertAbove = false) {
     const newLine = document.createElement('div');
     newLine.className = 'line';
@@ -336,8 +368,7 @@
     placeCursorAtEnd(newContent);
     return newLine;
   }
-
-  // Listener para detecção de Enter
+  
   editorArea.addEventListener('keydown', (e) => {
     if (e.target.classList.contains('lineContent') && e.key === 'Enter') {
       e.preventDefault();
@@ -346,26 +377,33 @@
     }
   });
 
-  // Listener principal para o editor (gerencia todos os cliques na área do editor)
   editorArea.addEventListener('click', (e) => {
     const lineElement = e.target.closest('.line');
     
-    // Oculta o menu se o clique não for em uma linha
     if (!lineElement) {
       contextMenu.style.display = 'none';
       return;
     }
 
-    // Se o clique for na lixeira, remove a linha e sai da função
     if (e.target.classList.contains('deleteLine')) {
+      if (lineElement.isSameNode(editorArea.firstElementChild)) {
+        alert("A primeira linha não pode ser excluída.");
+        return;
+      }
+      
+      // Remove a ação correspondente do array antes de remover a linha
+      const lineIndex = Array.from(editorArea.children).indexOf(lineElement);
+      if (lineIndex > -1) {
+          scriptActions.splice(lineIndex, 1);
+      }
+      
       lineElement.remove();
       renumberLines();
       contextMenu.style.display = 'none';
       return;
     }
 
-    // Lógica para exibir o menu de contexto
-    e.preventDefault(); // Impede o comportamento padrão de foco
+    e.preventDefault();
     currentLine = lineElement;
     
     const rect = lineElement.getBoundingClientRect();
@@ -373,7 +411,6 @@
     contextMenu.style.left = `${rect.left + window.scrollX}px`;
     contextMenu.style.display = 'block';
 
-    // Lógica para focar a linha para edição
     const content = lineElement.querySelector('.lineContent');
     if (content.textContent.trim() === "Editar linha") {
         content.textContent = "";
@@ -382,71 +419,128 @@
     placeCursorAtEnd(content);
   });
   
-  // Listener de clique nas opções do menu
+  editorArea.addEventListener('dblclick', (e) => {
+    const lineElement = e.target.closest('.line');
+    if (lineElement) {
+      const lineContent = lineElement.querySelector('.lineContent');
+      if (lineContent && lineContent.dataset.action) {
+        // Remove a ação correspondente do array
+        const lineIndex = Array.from(editorArea.children).indexOf(lineElement);
+        if (lineIndex > -1) {
+            scriptActions.splice(lineIndex, 1);
+        }
+
+        lineElement.innerHTML = `
+          <p class="lineNumber"></p>
+          <p class="lineContent" contenteditable="true">Editar linha</p>
+          <p class="deleteLine">🗑️</p>
+        `;
+        currentLine = lineElement;
+
+        const rect = lineElement.getBoundingClientRect();
+        contextMenu.style.top = `${rect.bottom + window.scrollY}px`;
+        contextMenu.style.left = `${rect.left + window.scrollX}px`;
+        contextMenu.style.display = 'block';
+
+        renumberLines();
+
+        const newContent = lineElement.querySelector('.lineContent');
+        newContent.focus();
+        placeCursorAtEnd(newContent);
+      }
+    }
+  });
+  
+  const actionTemplates = {
+    'insert-row-above': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1" data-input-name="rows"> linhas acima da célula <input placeholder="A1" data-input-name="cell"></p><p class="deleteLine">🗑️</p>`,
+    'insert-row-below': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1" data-input-name="rows"> linhas abaixo da célula <input placeholder="A1" data-input-name="cell"></p><p class="deleteLine">🗑️</p>`,
+    'insert-col-right': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1" data-input-name="cols"> colunas à direita da célula <input placeholder="A1" data-input-name="cell"></p><p class="deleteLine">🗑️</p>`,
+    'insert-col-left': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1" data-input-name="cols"> colunas à esquerda da célula <input placeholder="A1" data-input-name="cell"></p><p class="deleteLine">🗑️</p>`,
+    'delete-row': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Excluir linha(s) <input placeholder="1" data-input-name="rows"></p><p class="deleteLine">🗑️</p>`,
+    'delete-col': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Excluir coluna(s) <input placeholder="A" data-input-name="col"></p><p class="deleteLine">🗑️</p>`,
+    'insert-content': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir conteúdo <input placeholder="texto" data-input-name="content"> na célula <input placeholder="A1" data-input-name="cell"></p><p class="deleteLine">🗑️</p>`,
+    'clear-content': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Limpar conteúdo da célula <input placeholder="A1" data-input-name="cell"></p><p class="deleteLine">🗑️</p>`,
+    'find-and-replace': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Localizar <input placeholder="texto antigo" data-input-name="old_text"> e substituir por <input placeholder="novo texto" data-input-name="new_text"></p><p class="deleteLine">🗑️</p>`,
+    'remove-duplicates': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Remover duplicados na coluna <input placeholder="A" data-input-name="col"></p><p class="deleteLine">🗑️</p>`,
+    'data-validation': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Validar dados na coluna <input placeholder="A" data-input-name="col"></p><p class="deleteLine">🗑️</p>`,
+    'split-text': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Dividir texto da coluna <input placeholder="A" data-input-name="col"> pelo delimitador <input placeholder="," data-input-name="delimiter"></p><p class="deleteLine">🗑️</p>`,
+    'merge-cells': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Unir células de <input placeholder="A1" data-input-name="start_cell"> até <input placeholder="B2" data-input-name="end_cell"></p><p class="deleteLine">🗑️</p>`,
+    'reformat-data': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Reformatar dados da coluna <input placeholder="A" data-input-name="col"></p><p class="deleteLine">🗑️</p>`,
+    'sort-col-asc': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Classificar coluna <input placeholder="A" data-input-name="col"> em ordem crescente</p><p class="deleteLine">🗑️</p>`,
+    'sort-col-desc': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Classificar coluna <input placeholder="A" data-input-name="col"> em ordem decrescente</p><p class="deleteLine">🗑️</p>`,
+    'sort-row-asc': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Classificar linha <input placeholder="1" data-input-name="row"> em ordem crescente</p><p class="deleteLine">🗑️</p>`,
+    'sort-row-desc': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Classificar linha <input placeholder="1" data-input-name="row"> em ordem decrescente</p><p class="deleteLine">🗑️</p>`,
+    'download-xlsx': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Baixar como XLSX 🗃️</p><p class="deleteLine">🗑️</p>`,
+    'download-pdf': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Baixar como PDF 🗃️</p><p class="deleteLine">🗑️</p>`,
+    'download-json': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Baixar como JSON 🗃️</p><p class="deleteLine">🗑️</p>`,
+    'download-html': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Baixar como HTML 🗃️</p><p class="deleteLine">🗑️</p>`,
+    'download-csv': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Baixar como CSV 🗃️</p><p class="deleteLine">🗑️</p>`,
+    'download-xml': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Baixar como XML 🗃️</p><p class="deleteLine">🗑️</p>`,
+    'convert-html-to-excel': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Converter HTML para EXCEL 🔄</p><p class="deleteLine">🗑️</p>`,
+    'convert-json-to-excel': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Converter JSON para EXCEL 🔄</p><p class="deleteLine">🗑️</p>`,
+    'convert-txt-to-excel': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Converter TXT para EXCEL 🔄</p><p class="deleteLine">🗑️</p>`,
+    'generate-report': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Gerar relatório da planilha 📊</p><p class="deleteLine">🗑️</p>`,
+    'send-email': `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Enviar planilha para <input placeholder="email@exemplo.com" data-input-name="email"></p><p class="deleteLine">🗑️</p>`
+  };
+
   contextMenu.addEventListener('click', (e) => {
     const action = e.target.dataset.action;
     if (!currentLine || !action) return;
     const lineFocus = currentLine;
 
-    switch (action) {
-  case 'insertRowAbove':
-    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1"> linhas acima da célula <input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
-    createNewLine(currentLine);
-    break;
-  case 'insertRowBelow':
-    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1"> linhas abaixo da célula <input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
-    createNewLine(currentLine);
-    break;
-  case 'insertColRight':
-    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1"> linhas a direita da célula <input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
-    createNewLine(currentLine);
-    break;
-  case 'insertColLeft':
-    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir <input placeholder="1"> linhas a esquerda da célula <input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
-    createNewLine(currentLine);
-    break;
-  case 'deleteLine':
-    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Excluir linhas <input placeholder="1"></p><p class="deleteLine">🗑️</p>`
-    createNewLine(currentLine);
-    break;
-  case 'deleteCol':
-    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Excluir coluna <input placeholder="A"></p><p class="deleteLine">🗑️</p>`
-    createNewLine(currentLine);
-    break;
-  case 'insertContent':
-    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Inserir conteúdo <input placeholder="texto">na célula<input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
-    createNewLine(currentLine);
-    break;
-  case 'clearContent':
-    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Limpar conteúdo da célula<input placeholder="A1"></p><p class="deleteLine">🗑️</p>`
-    createNewLine(currentLine);
-    break;
-  case 'sortAsc':
-    break;
-  case 'sortDesc':
-    break;
-  case 'downloadPDF':
-    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Baixar como PDF 🗃️</p><p class="deleteLine">🗑️</p>`
-    createNewLine(currentLine);
-    break;
-  case 'downloadJSON':
-    lineFocus.innerHTML = `<p class="lineNumber">1</p><p class="lineContent" data-action="true">Baixar como JSON 🗃️</p><p class="deleteLine">🗑️</p>`
-    createNewLine(currentLine);
-    break;
-}
-    contextMenu.style.display = 'none';
-    resetFilter(); // Reseta o filtro ao selecionar uma opção
-  });
+    const template = actionTemplates[action];
 
-  // Esconde o menu se o usuário clicar fora dele
+    if (template) {
+      lineFocus.innerHTML = template;
+      
+      const lineIndex = Array.from(editorArea.children).indexOf(lineFocus);
+      const inputs = Array.from(lineFocus.querySelectorAll('input')).reduce((acc, input) => {
+        acc[input.dataset.inputName] = input.value || input.placeholder;
+        return acc;
+      }, {});
+
+      // Salva a ação e os inputs no array
+      scriptActions[lineIndex] = { action, inputs };
+      
+      createNewLine(currentLine);
+    }
+    
+    contextMenu.style.display = 'none';
+    resetFilter();
+  });
+  
+  // Adiciona o evento de click no botão de processar
+  previewButton.addEventListener('click', () => {
+    // Coleta as ações preenchidas pelo usuário
+    const finalScriptActions = [];
+    document.querySelectorAll('.line').forEach(line => {
+        const actionElement = line.querySelector('.lineContent[data-action]');
+        if (actionElement) {
+            const action = line.querySelector('.menu-item').dataset.action;
+            const inputs = Array.from(line.querySelectorAll('input')).reduce((acc, input) => {
+                const name = input.dataset.inputName;
+                const value = input.value || input.placeholder;
+                if (name) {
+                    acc[name] = value;
+                }
+                return acc;
+            }, {});
+            finalScriptActions.push({ action: action, inputs: inputs });
+        }
+    });
+
+    console.log("Script de Ações Final:");
+    console.log(finalScriptActions);
+    alert("Processando planilhas... Verifique o console para ver o script de ações.");
+  });
+  
   document.addEventListener('click', (e) => {
     if (!contextMenu.contains(e.target) && !e.target.closest('.line')) {
       contextMenu.style.display = 'none';
-      resetFilter(); // Reseta o filtro ao fechar o menu
+      resetFilter();
     }
   });
 
-  // Listener para gerenciar a edição do texto
   editorArea.addEventListener('focus', (e) => {
     if (e.target.classList.contains('lineContent')) {
       if (e.target.textContent.trim() === "Editar linha") {
@@ -463,11 +557,6 @@
     }
   }, true);
   
-  // ----------------------------------------------------
-  // CÓDIGO PARA A FUNCIONALIDADE DE FILTRO
-  // ----------------------------------------------------
-
-  // Função para aplicar o filtro
   function applyFilter(filterText) {
     const filterLower = filterText.toLowerCase().trim();
     if (filterLower.length > 0) {
@@ -480,19 +569,16 @@
         }
       });
     } else {
-      // Se o filtro estiver vazio, mostra todos os itens
       resetFilter();
     }
   }
 
-  // Função para remover o filtro e mostrar todos os itens
   function resetFilter() {
     menuItems.forEach(item => {
       item.style.display = 'block';
     });
   }
 
-  // Listener para filtrar o menu enquanto o usuário digita na linha
   editorArea.addEventListener('input', (e) => {
     if (contextMenu.style.display === 'block' && e.target.classList.contains('lineContent')) {
       const filterValue = e.target.textContent;
